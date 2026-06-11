@@ -48,7 +48,7 @@ export default function Blogs() {
         {blogs.length === 0 ? (
           <div className="card">
             <h2>No public blogs yet</h2>
-            <p>Approved blogs will appear here automatically.</p>
+            <p>Accepted blogs will appear here automatically.</p>
           </div>
         ) : (
           blogs.map((blog) => (
@@ -80,5 +80,3 @@ export default function Blogs() {
     </>
   );
 }
-
-

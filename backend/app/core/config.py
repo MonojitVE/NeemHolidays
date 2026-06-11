@@ -1,7 +1,8 @@
 from pydantic_settings import BaseSettings
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "postgresql+psycopg2://postgres:root123@localhost:5432/travel_agent"
+    # DATABASE_URL: str = "postgresql+psycopg2://postgres:root123@localhost:5432/travel_agent"
+    DATABASE_URL: str = "postgresql://postgres:Pass123@localhost:5432/travel_agent"
 
     JWT_SECRET_KEY: str = "change-this-secret"
     JWT_ALGORITHM: str = "HS256"

@@ -1,39 +1,100 @@
 import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import {
+  Plane,
+  Landmark,
+  Sparkles,
+  Sailboat,
+  Globe2,
+  Settings,
+  ArrowRight,
+  ArrowDown,
+} from "lucide-react";
 
 // Unsplash realistic images
 const IMAGES = {
   hero: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=90", // Amsterdam canal
-  amsterdam: "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=900&q=85",
-  paris: "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900&q=85",
-  keukenhof: "https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=900&q=85",
-  parisCulture: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=85",
-  giethoorn: "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=900&q=85",
-  miniEurope: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=85",
-  slide1: "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1400&q=85",
-  slide2: "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=1400&q=85",
-  slide3: "https://images.unsplash.com/photo-1431274172761-fca41d930114?w=1400&q=85",
+  amsterdam:
+    "https://images.unsplash.com/photo-1534351590666-13e3e96b5017?w=900&q=85",
+  paris:
+    "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?w=900&q=85",
+  keukenhof:
+    "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=85",
+  parisCulture:
+    "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=900&q=85",
+  giethoorn:
+    "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?w=900&q=85",
+  miniEurope:
+    "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?w=900&q=85",
+  slide1:
+    "https://images.unsplash.com/photo-1533929736458-ca588d08c8be?w=1400&q=85",
+  slide2:
+    "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?w=1400&q=85",
+  slide3:
+    "https://images.unsplash.com/photo-1431274172761-fca41d930114?w=1400&q=85",
 };
 
 const SLIDES = [
-  { img: IMAGES.hero, city: "Amsterdam", tag: "Netherlands · Belgium · France", subtitle: "European Dream" },
-  { img: IMAGES.slide1, city: "Paris", tag: "Culture · Food · Attractions", subtitle: "City of Light" },
-  { img: IMAGES.slide2, city: "Keukenhof", tag: "Tulip Gardens · Spring Tourism", subtitle: "Flower Paradise" },
+  {
+    img: IMAGES.hero,
+    city: "Amsterdam",
+    tag: "Netherlands · Belgium · France",
+    subtitle: "European Dream",
+  },
+  {
+    img: IMAGES.slide1,
+    city: "Paris",
+    tag: "Culture · Food · Attractions",
+    subtitle: "City of Light",
+  },
+  {
+    img: IMAGES.keukenhof,
+    city: "Keukenhof",
+    tag: "Tulip Gardens · Spring Tourism",
+    subtitle: "Flower Paradise",
+  },
 ];
 
 const DESTINATIONS = [
-  { img: IMAGES.paris, label: "PARIS", sub: "Eiffel Tower · Louvre Museum · Seine River · French Cuisine", color: "orange", size: "large" },
-  { img: IMAGES.amsterdam, label: "AMSTERDAM", sub: "Canal Cruise · Van Gogh Museum · Jordaan District", color: "teal", size: "normal" },
-  { img: IMAGES.parisCulture, label: "PARIS CULTURE", sub: "Art, cafés, fashion, heritage, museums, and city events", color: "teal", size: "normal" },
-  { img: IMAGES.keukenhof, label: "KEUKENHOF", sub: "Tulip Gardens · Flower Exhibitions · Spring Tourism", color: "orange", size: "normal" },
+  {
+    img: IMAGES.paris,
+    label: "PARIS",
+    sub: "Eiffel Tower · Louvre Museum · Seine River · French Cuisine",
+    color: "orange",
+    size: "large",
+  },
+  {
+    img: IMAGES.amsterdam,
+    label: "AMSTERDAM",
+    sub: "Canal Cruise · Van Gogh Museum · Jordaan District",
+    color: "teal",
+    size: "normal",
+  },
+  {
+    img: IMAGES.parisCulture,
+    label: "PARIS CULTURE",
+    sub: "Art, cafés, fashion, heritage, museums, and city events",
+    color: "teal",
+    size: "normal",
+  },
+  {
+    img: IMAGES.keukenhof,
+    label: "KEUKENHOF",
+    sub: "Tulip Gardens · Flower Exhibitions · Spring Tourism",
+    color: "orange",
+    size: "normal",
+  },
 ];
 
 function useScrollReveal() {
   useEffect(() => {
     const els = document.querySelectorAll(".reveal");
     const obs = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.13 }
+      (entries) =>
+        entries.forEach(
+          (e) => e.isIntersecting && e.target.classList.add("visible"),
+        ),
+      { threshold: 0.13 },
     );
     els.forEach((el) => obs.observe(el));
     return () => obs.disconnect();
@@ -52,7 +113,10 @@ export default function Home() {
     setSliding(true);
     setPrevSlide(slide);
     setSlide(idx);
-    setTimeout(() => { setSliding(false); setPrevSlide(null); }, 800);
+    setTimeout(() => {
+      setSliding(false);
+      setPrevSlide(null);
+    }, 800);
   };
 
   useEffect(() => {
@@ -61,7 +125,10 @@ export default function Home() {
         const next = (s + 1) % SLIDES.length;
         setPrevSlide(s);
         setSliding(true);
-        setTimeout(() => { setSliding(false); setPrevSlide(null); }, 800);
+        setTimeout(() => {
+          setSliding(false);
+          setPrevSlide(null);
+        }, 800);
         return next;
       });
     }, 5000);
@@ -72,10 +139,19 @@ export default function Home() {
     <div className="hm-root">
       {/* NAVBAR */}
       <nav className="hm-nav">
-        <span className="hm-logo">✈ Travel<span>Muse</span></span>
+        <span className="hm-logo">
+          <Plane
+            size={18}
+            strokeWidth={2.5}
+            style={{ marginRight: 6, verticalAlign: "-3px" }}
+          />
+          MASA<span>Travels</span>
+        </span>
         <div className="hm-nav-links">
           <Link to="/blogs">Blogs</Link>
-          <Link to="/login" className="hm-nav-cta">Admin Login</Link>
+          <Link to="/login" className="hm-nav-cta">
+            Admin Login
+          </Link>
         </div>
       </nav>
 
@@ -91,10 +167,16 @@ export default function Home() {
             <div className="hm-slide-content">
               <span className="hm-slide-tag reveal fade-up">{s.tag}</span>
               <h1 className="hm-slide-city reveal fade-up delay-1">{s.city}</h1>
-              <p className="hm-slide-sub reveal fade-up delay-2">{s.subtitle}</p>
+              <p className="hm-slide-sub reveal fade-up delay-2">
+                {s.subtitle}
+              </p>
               <div className="hm-slide-btns reveal fade-up delay-3">
-                <Link to="/blogs" className="hm-hero-btn primary">Explore Blogs</Link>
-                <a href="#destinations" className="hm-hero-btn ghost">Destinations ↓</a>
+                <Link to="/blogs" className="hm-hero-btn primary">
+                  Explore Blogs <ArrowRight size={15} strokeWidth={2.5} />
+                </Link>
+                <a href="#destinations" className="hm-hero-btn ghost">
+                  Destinations <ArrowDown size={15} strokeWidth={2.5} />
+                </a>
               </div>
             </div>
           </div>
@@ -103,16 +185,32 @@ export default function Home() {
         {/* Slide dots */}
         <div className="hm-dots">
           {SLIDES.map((_, i) => (
-            <button key={i} className={`hm-dot ${i === slide ? "active" : ""}`} onClick={() => goTo(i)} />
+            <button
+              key={i}
+              className={`hm-dot ${i === slide ? "active" : ""}`}
+              onClick={() => goTo(i)}
+            />
           ))}
         </div>
 
         {/* Stats strip */}
         <div className="hm-stats-strip">
-          <div><span className="hm-stat-num">10</span><span className="hm-stat-label">Days</span></div>
-          <div><span className="hm-stat-num">₹1.8L+</span><span className="hm-stat-label">From</span></div>
-          <div className="orange"><span className="hm-stat-num">AI</span><span className="hm-stat-label">Blogs</span></div>
-          <div><span className="hm-stat-num">3</span><span className="hm-stat-label">Countries</span></div>
+          <div>
+            <span className="hm-stat-num">10</span>
+            <span className="hm-stat-label">Days</span>
+          </div>
+          <div>
+            <span className="hm-stat-num">₹1.8L+</span>
+            <span className="hm-stat-label">From</span>
+          </div>
+          <div className="orange">
+            <span className="hm-stat-num">AI</span>
+            <span className="hm-stat-label">Blogs</span>
+          </div>
+          <div>
+            <span className="hm-stat-num">3</span>
+            <span className="hm-stat-label">Countries</span>
+          </div>
         </div>
       </section>
 
@@ -120,17 +218,23 @@ export default function Home() {
       <section className="hm-tabs-section">
         <div className="hm-tabs">
           <div className="hm-tab active">
-            <div className="hm-tab-icon">🗼</div>
+            <div className="hm-tab-icon">
+              <Landmark size={26} strokeWidth={1.75} />
+            </div>
             <strong>PARIS</strong>
             <p>Culture, Food & Attractions</p>
           </div>
           <div className="hm-tab orange">
-            <div className="hm-tab-icon">🤖</div>
+            <div className="hm-tab-icon">
+              <Sparkles size={26} strokeWidth={1.75} />
+            </div>
             <strong>AI BLOGS</strong>
             <p>RSS News → Human Approval</p>
           </div>
           <div className="hm-tab">
-            <div className="hm-tab-icon">🚤</div>
+            <div className="hm-tab-icon">
+              <Sailboat size={26} strokeWidth={1.75} />
+            </div>
             <strong>AMSTERDAM</strong>
             <p>Canals, Museums & Events</p>
           </div>
@@ -153,20 +257,37 @@ export default function Home() {
               <p>{DESTINATIONS[0].sub}</p>
             </div>
             <div className="hm-gcard-hover">
-              <Link to="/blogs" className="hm-explore-btn">Read Articles →</Link>
+              <Link to="/blogs" className="hm-explore-btn">
+                Read Articles{" "}
+                <ArrowRight
+                  size={14}
+                  strokeWidth={2.5}
+                  style={{ verticalAlign: "-2px", marginLeft: 4 }}
+                />
+              </Link>
             </div>
           </div>
           {/* Right column */}
           <div className="hm-gcol">
             {DESTINATIONS.slice(1).map((d, i) => (
-              <div key={i} className={`hm-gcard reveal fade-right delay-${i + 1}`}>
+              <div
+                key={i}
+                className={`hm-gcard reveal fade-right delay-${i + 1}`}
+              >
                 <img src={d.img} alt={d.label} loading="lazy" />
                 <div className={`hm-glabel ${d.color}`}>
                   <h3>{d.label}</h3>
                   <p>{d.sub}</p>
                 </div>
                 <div className="hm-gcard-hover">
-                  <Link to="/blogs" className="hm-explore-btn">Read Articles →</Link>
+                  <Link to="/blogs" className="hm-explore-btn">
+                    Read Articles{" "}
+                    <ArrowRight
+                      size={14}
+                      strokeWidth={2.5}
+                      style={{ verticalAlign: "-2px", marginLeft: 4 }}
+                    />
+                  </Link>
                 </div>
               </div>
             ))}
@@ -208,7 +329,9 @@ export default function Home() {
         </div>
         <div className="hm-platform-cards">
           <div className="hm-pcard teal reveal fade-left">
-            <div className="hm-pcard-icon">🌍</div>
+            <div className="hm-pcard-icon">
+              <Globe2 size={32} strokeWidth={1.75} />
+            </div>
             <h3>PUBLIC TRAVEL SITE</h3>
             <p className="hm-pcard-sub">Paris & Amsterdam Blogs</p>
             <ul>
@@ -218,10 +341,19 @@ export default function Home() {
               <li>Travel-news focused content</li>
               <li>Brochure-style visual layout</li>
             </ul>
-            <Link to="/blogs" className="hm-pcard-btn">View Blogs →</Link>
+            <Link to="/blogs" className="hm-pcard-btn">
+              View Blogs{" "}
+              <ArrowRight
+                size={14}
+                strokeWidth={2.5}
+                style={{ verticalAlign: "-2px", marginLeft: 4 }}
+              />
+            </Link>
           </div>
           <div className="hm-pcard orange reveal fade-right">
-            <div className="hm-pcard-icon">⚙️</div>
+            <div className="hm-pcard-icon">
+              <Settings size={32} strokeWidth={1.75} />
+            </div>
             <h3>ADMIN DASHBOARD</h3>
             <p className="hm-pcard-sub">AI Content Review</p>
             <ul>
@@ -231,7 +363,14 @@ export default function Home() {
               <li>Prepare social media posts</li>
               <li>Mock/real posting workflow ready</li>
             </ul>
-            <Link to="/login" className="hm-pcard-btn">Open Dashboard →</Link>
+            <Link to="/login" className="hm-pcard-btn">
+              Open Dashboard{" "}
+              <ArrowRight
+                size={14}
+                strokeWidth={2.5}
+                style={{ verticalAlign: "-2px", marginLeft: 4 }}
+              />
+            </Link>
           </div>
         </div>
       </section>
@@ -239,13 +378,22 @@ export default function Home() {
       {/* FOOTER */}
       <footer className="hm-footer">
         <div className="hm-footer-inner">
-          <span className="hm-logo">✈ Travel<span>Muse</span></span>
+          <span className="hm-logo">
+            <Plane
+              size={20}
+              strokeWidth={2.5}
+              style={{ marginRight: 6, verticalAlign: "-3px" }}
+            />
+            MASA<span>Travels</span>
+          </span>
           <p>AI-powered travel content for Paris & Amsterdam</p>
           <div className="hm-footer-links">
             <Link to="/blogs">Blogs</Link>
             <Link to="/login">Admin</Link>
           </div>
-          <p className="hm-footer-copy">© 2025 TravelMuse · All rights reserved</p>
+          <p className="hm-footer-copy">
+            © 2025 MASATravels · All rights reserved
+          </p>
         </div>
       </footer>
     </div>
